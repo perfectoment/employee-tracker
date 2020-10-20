@@ -31,7 +31,7 @@ connection.connect(function(err) {
       }).then(function(answer){
         switch(answer.options){
             case "View":
-                viewPeople();
+                viewQuestions();
                 break;
             case "Add":
                 addQuestions();
@@ -169,4 +169,64 @@ function addEmployee(){
 
 }
 
-firstQuestion();
+function viewQuestions(){
+    inquirer.prompt({
+        name: "viewOptions",
+        type: "list",
+        message: "What would you like to view?",
+        choices: ["Employee", 
+        "Role",
+        "Department", "Quit",
+        ]
+
+      }).then(function(answer){
+        switch(answer.viewOptions){
+            case "Employee":
+                viewEmployee();
+                break;
+            case "Role":
+                viewRole();
+                break;
+            case "Department":
+                viewDepartment();
+                break;
+            default:
+            connection.end();
+        }
+      });
+
+}
+
+function viewDepartment(){
+connection.query("SELECT * FROM department", (err, res) => {
+    if (err) throw err;
+    
+    console.table(res);
+
+})
+firstQuestion()
+}
+function viewRole(){
+    connection.query("SELECT * FROM job", (err, res) => {
+        if (err) throw err;
+        
+        console.table(res);
+    
+})
+firstQuestion()
+}
+function viewEmployee(){
+    connection.query("SELECT * FROM employee", (err, res) => {
+        if (err) throw err;
+        
+        console.table(res);
+        
+})
+firstQuestion()
+}
+
+
+
+
+
+firstQuestion()
