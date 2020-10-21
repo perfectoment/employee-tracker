@@ -1,7 +1,7 @@
 # Employee Tracker
 
 I created a program that alows you to enter employee, role, and department information from you company and atoumatically links them together. When "Node Index.js" is entered a series of prompts appear  in the terminal that allow you to see each of those tables, add information to those tables and adjust the roles of employee's when they are promoted. 
-## Code Snippet for Empolyee Tracker SQL 
+## Code Snippet for Employee Tracker SQL 
 ```
 function addEmployee(){
     var query = connection.query("SELECT * FROM job", (err, res) => {
