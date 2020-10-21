@@ -249,12 +249,12 @@ function updateRole(){
         var jobtitles = res.find((job) => job.title === answer.update);
         connection.query("UPDATE employee, job SET employee.role_id =? WHERE employee.last_name =?", [ jobtitles.id, answer.lastName ])
         
-          })
+         firstQuestion() })
         
 
 })
 
-firstQuestion()
+
 }
 
 
