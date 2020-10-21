@@ -225,6 +225,39 @@ function viewEmployee(){
 firstQuestion()
 }
 
+function updateRole(){
+    connection.query("SELECT job.id, last_name, role_id, title FROM employee, job WHERE job.id=role_id", (err, res) => {
+        if (err) throw err;
+    var empNames = res.map((update) => update.last_name);
+    var jobNames = res.map((update) => update.title); 
+    
+
+    inquirer.prompt([
+        {
+        name:"lastName",
+        type:"list",
+        message:"What is the last name of the employee you would like to update?",
+        choices: empNames
+        },
+        {
+         name:"update",
+         type:"list",
+         message:"What would you like to update their role be?",
+         choices: jobNames
+        }
+    ]).then(function(answer) {
+        var jobtitles = res.find((job) => job.title === answer.update);
+        console.log(jobtitles.id)
+        connection.query("UPDATE employee, job SET employee.role_id =? WHERE employee.last_name =?", [ jobtitles.id, answer.lastName ])
+       
+          })
+        
+
+})
+
+firstQuestion()
+}
+
 
 
 
